@@ -9,13 +9,24 @@ public class ShooterSubsystem extends SubsystemBase {
     private MotorEx shooterMotor;
     public ShooterSubsystem(HardwareMap hwMap){
         shooterMotor = new MotorEx(hwMap, "ShooterMotor");
+        shooterMotor.setInverted(true);
     }
     public void start(){
-        shooterMotor.set(1);
+        shooterMotor.set(0.8);
     }
     public void stop(){
-        shooterMotor.stopMotor();
+        shooterMotor.set(0);
     }
+    public double RPM(){
+        return shooterMotor.getVelocity();
+    }
+    public double Power(){
+        return shooterMotor.getRawPower();
+    }
+    public double Raw(){
+        return shooterMotor.encoder.getRevolutions();
+    }
+
     @Override
     public void periodic() {
         super.periodic();

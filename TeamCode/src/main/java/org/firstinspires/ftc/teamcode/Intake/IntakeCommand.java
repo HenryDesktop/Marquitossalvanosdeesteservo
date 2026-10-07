@@ -21,7 +21,7 @@ public class IntakeCommand extends CommandBase {
     }
     @Override
     public void execute(){
-        intakeSubsystem.setPower(0.8);
+        intakeSubsystem.setPower(1);
     }
     @Override
     public void end(boolean interrupted) {

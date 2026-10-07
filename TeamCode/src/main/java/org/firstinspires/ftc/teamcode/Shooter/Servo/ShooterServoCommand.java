@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode.Shooter.Servo;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
-import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
-public class ServosCommand extends CommandBase {
-    private final Servos servoSubsystem;
-    public ServosCommand(Servos servoSubsystem){
+public class ShooterServoCommand extends CommandBase {
+    private final ShooterServoSubsystem servoSubsystem;
+    public ShooterServoCommand(ShooterServoSubsystem servoSubsystem){
         this.servoSubsystem = servoSubsystem;
         addRequirements(servoSubsystem);
     }
@@ -18,12 +17,12 @@ public class ServosCommand extends CommandBase {
     @Override
     public void execute() {
         super.execute();
-        servoSubsystem.right();
+        servoSubsystem.start();
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        servoSubsystem.left();
+        servoSubsystem.stop();
     }
 }

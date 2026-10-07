@@ -1,7 +1,7 @@
 /* ============================================================= *
  *                 Turtle Tracer — Auto-Generated                *
  *                                                               *
- *  Version: 2.3.0.                                              *
+ *  Version: 2.4.0.                                              *
  *  Copyright (c) 2026 Matthew Allen                             *
  *                                                               *
  *  THIS FILE IS AUTO-GENERATED — DO NOT EDIT MANUALLY.          *
@@ -19,18 +19,16 @@ import com.bylazar.telemetry.PanelsTelemetry;
 import com.bylazar.telemetry.TelemetryManager;
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
-import com.pedropathing.paths.interpolator.Interpolator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.PedroConstants;
 
-@Autonomous(name = "Line", group = "Autonomous")
+@Autonomous (name = "Auto Line")
 @Configurable // Panels
-public class AutoLine extends OpMode {
+public class TurtleTracerAutonomousLINE extends OpMode {
 
   private TelemetryManager panelsTelemetry; // Panels Telemetry instance
   public Follower follower; // Pathing follower instance
@@ -47,8 +45,7 @@ public class AutoLine extends OpMode {
     panelsTelemetry.update(telemetry);
 
     follower = PedroConstants.create(hardwareMap);
-    // Determine starting heading: prefer geometric heading when a path exists, otherwise fall back to explicit startPoint values
-    follower.setPose(p.of(9.000, 25.000, 0.000));
+    follower.setPose(p.of(10.000, 10.000, 0.000));
 
     pathTimer = new ElapsedTime();
     paths = new Paths(follower); // Build paths
@@ -74,8 +71,8 @@ public class AutoLine extends OpMode {
 
     public Paths(Follower follower) {
       DriveToShoot = line(
-        p.of(9.000, 25.000, 0.0),
-        p.of(39.350, 25.000, 0.0)
+        p.of(10.000, 10.000, 0.0),
+        p.of(35.919, 10.000, 0.0)
       ).linear(Math.toRadians(0), Math.toRadians(0));
     }
   }

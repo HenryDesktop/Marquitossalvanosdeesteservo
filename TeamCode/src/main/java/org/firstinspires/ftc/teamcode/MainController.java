@@ -14,12 +14,12 @@ import org.firstinspires.ftc.teamcode.Intake.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Intake.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Shooter.Sensor.SensorSubsystem;
 import org.firstinspires.ftc.teamcode.Shooter.Sensor.SensorTest;
-import org.firstinspires.ftc.teamcode.Shooter.Servo.ServosCommand;
-import org.firstinspires.ftc.teamcode.Shooter.Servo.Servos;
+import org.firstinspires.ftc.teamcode.Intake.Servo.IntakeCommandSubsystem;
+import org.firstinspires.ftc.teamcode.Intake.Servo.IntakeServoSubsystem;
+import org.firstinspires.ftc.teamcode.Shooter.Servo.ShooterServoCommand;
+import org.firstinspires.ftc.teamcode.Shooter.Servo.ShooterServoSubsystem;
 import org.firstinspires.ftc.teamcode.Shooter.ShooterCommand;
 import org.firstinspires.ftc.teamcode.Shooter.ShooterSubsystem;
-//import org.firstinspires.ftc.teamcode.Intake.Servos.ServoSubsystem;
-//import org.firstinspires.ftc.teamcode.Intake.Servos.ServosCommand;
 
 @TeleOp
 public class MainController extends CommandOpMode {
@@ -33,7 +33,7 @@ public class MainController extends CommandOpMode {
 
     IntakeSubsystem intakeSubsystem;
     ShooterSubsystem shooterSubsystem;
-    Servos servoSubsystem;
+    ShooterServoSubsystem shooterServoSubsystem;
     SensorSubsystem sensorSubsystem;
     SensorTest sensorTest;
 
@@ -53,7 +53,7 @@ public class MainController extends CommandOpMode {
         chasisSusbystem = new ChasisSusbystem(hardwareMap, configureIMU);
         intakeSubsystem = new IntakeSubsystem(hardwareMap);
         shooterSubsystem = new ShooterSubsystem(hardwareMap);
-        servoSubsystem = new Servos(hardwareMap);
+        shooterServoSubsystem = new ShooterServoSubsystem(hardwareMap);
 
         sensorSubsystem = new SensorSubsystem(hardwareMap, telemetry);
         sensorTest = new SensorTest(hardwareMap, telemetry);
@@ -86,7 +86,7 @@ public class MainController extends CommandOpMode {
 
         new Trigger(() ->
                 mechanismController.getButton(GamepadKeys.Button.B)
-        ).whileActiveContinuous(new ServosCommand(servoSubsystem));
+        ).whileActiveContinuous(new ShooterServoCommand(shooterServoSubsystem));
 
 
         //----------------------------/Shooter/----------------------
@@ -106,8 +106,11 @@ public class MainController extends CommandOpMode {
         telemetry.addData("Heading Lock", chasisSusbystem.isLockEnabled() ? "ACTIVADO" : "DESACTIVADO");
         telemetry.addData("Heading", configureIMU.getHeading(AngleUnit.DEGREES));
         telemetry.addData("RX", chasisSusbystem.getOutPID());
-        telemetry.addData("Right position", servoSubsystem.servoRightPosition());
-        telemetry.addData("Left position", servoSubsystem.servoLeftPosition());
+        telemetry.addData("Shooter RPM", shooterSubsystem.RPM());
+        telemetry.addData("Shooter Encoder Velocity", shooterSubsystem.Power());
+        telemetry.addData("Shooter Raw Power", shooterSubsystem.Raw());
+       // telemetry.addData("Shooter servo currentPosition", shooterServoSubsystem.servoCurrentPosition());
+       // telemetry.addData("Shooter servo distance", shooterServoSubsystem.servoDistance());
 
         telemetry.update();
 
